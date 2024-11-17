@@ -1,28 +1,28 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; 
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Route, Routes } from 'react-router-dom';
+import { useState } from 'react';
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
+import './App.css';
 import RecipeList from './components/RecipeList';
 import RecipeDetails from './components/RecipeDetails';
 import AddRecipeForm from './components/AddRecipeForm';
 import EditRecipeForm from './components/EditRecipeForm';
+import SearchBar from './components/SearchBar';
 
 function App() {
   return (
-    <Router>  {/* Wrap the app with Router for routing functionality */}
-      <div className="App">
-        <h1>Recipe Sharing App</h1>
+    <div className="App">
+      <h1>Recipe Sharing App</h1>
+      <SearchBar />
 
-        {/* Define Routes for different pages */}
-        <Routes>
-          <Route path="/" element={<RecipeList />} />  {/* Home page - Recipe list */}
-          <Route path="/recipe/:id" element={<RecipeDetails />} />  {/* Recipe details page */}
-          <Route path="/edit/:id" element={<EditRecipeForm />} />  {/* Edit recipe page */}
-          <Route path="/add" element={<AddRecipeForm />} />  {/* Add new recipe form */}
-        </Routes>
-      </div>
-    </Router>
+      {/* Define Routes for different pages */}
+      <Routes>
+        <Route path="/" element={<RecipeList />} />  {/* Home page - Recipe list */}
+        <Route path="/recipe/:id" element={<RecipeDetails />} />  {/* Recipe details page */}
+        <Route path="/edit/:id" element={<EditRecipeForm />} />  {/* Edit recipe page */}
+        <Route path="/add" element={<AddRecipeForm />} />  {/* Add new recipe form */}
+      </Routes>
+    </div>
   );
 }
 
