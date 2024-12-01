@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
+import { BrowserRouter } from "react-router-dom";
 import Home from './components/Home';
 import Profile from './components/Profile';
 import ProfileDetails from './components/ProfileDetails';
@@ -14,6 +15,7 @@ const App = () => {
   const isAuthenticated = true; // Set this to true or false based on your actual auth status
 
   return (
+    <BrowserRouter>
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/blog/:postId" element={<BlogPost />} />
@@ -32,6 +34,7 @@ const App = () => {
       <Route path="/profile/details" element={<ProfileDetails />} />
       <Route path="/profile/settings" element={<ProfileSettings />} />
     </Routes>
+    </BrowserRouter>
   );
 };
 
