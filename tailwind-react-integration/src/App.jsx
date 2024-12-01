@@ -2,12 +2,14 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import UserProfile from './components/UserProfile'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
+    <UserProfile />
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <header className="text-center">
         <h1 className="text-4xl font-bold text-blue-600">Welcome to Vite + React + Tailwind!</h1>
