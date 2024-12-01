@@ -18,7 +18,7 @@ const App = () => {
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/blog/:postId" element={<BlogPost />} />
+      <Route path="/blog/:id" element={<BlogPost />} />
       
       {/* Protected Route */}
       <Route
