@@ -20,8 +20,7 @@ const HomePage = () => {
           recipes.map((recipe) => (
             <div
               key={recipe.id}
-              className="bg-white rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 transition duration-300"
-            >
+              className="bg-white rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 transition duration-300">
               <img
                 src={recipe.image}
                 alt={recipe.title}
@@ -35,13 +34,23 @@ const HomePage = () => {
                 <button className="mt-4 text-blue-500 hover:text-blue-700">
   <Link to={`/recipe/${recipe.id}`}>View Recipe</Link>
                 </button>
-              </div>
+               </div>
+              
             </div>
           ))
         ) : (
           <p className="text-gray-500">Loading recipes...</p>
         )}
       </div>
+      <div className="mt-6 text-center">
+  <Link
+    to="/add-recipe"
+    className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 hover:shadow-lg transform hover:scale-105 transition duration-300"
+  >
+    Add a New Recipe
+  </Link>
+</div>
+
     </div>
   );
 };
