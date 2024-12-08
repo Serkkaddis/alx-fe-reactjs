@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 
 const AddRecipeForm = () => {
-  // State variables for each field
+  // Define state variables for each field
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState("");
   const [preparationSteps, setPreparationSteps] = useState("");
   const [error, setError] = useState("");
 
-  // Handle input changes
+  // Handle form field changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    // Update the corresponding state based on input name
     if (name === "title") {
       setTitle(value);
     } else if (name === "ingredients") {
@@ -25,28 +24,26 @@ const AddRecipeForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validation check
+    // Basic validation check
     if (!title || !ingredients || !preparationSteps) {
       setError("All fields are required.");
       return;
     }
 
-    // Proceed with form submission logic (e.g., sending data to a server)
+    // If everything is valid, handle the form submission
     console.log("Recipe Submitted:", { title, ingredients, preparationSteps });
 
-    // Reset form fields
+    // Reset form
     setTitle("");
     setIngredients("");
     setPreparationSteps("");
-    setError("");  // Clear any previous errors
+    setError("");
   };
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">
-        Add a New Recipe
-      </h1>
-      
+      <h1 className="text-2xl font-bold text-gray-800 mb-6">Add a New Recipe</h1>
+
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="title" className="block text-sm font-medium text-gray-700">Recipe Title</label>
