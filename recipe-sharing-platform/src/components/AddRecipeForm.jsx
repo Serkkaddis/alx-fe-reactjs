@@ -9,6 +9,7 @@ const AddRecipeForm = () => {
 
   // Handle form field changes
   const handleInputChange = (e) => {
+    console.log("Input Change Triggered", e.target.name, e.target.value);
     const { name, value } = e.target;
 
     if (name === "title") {
