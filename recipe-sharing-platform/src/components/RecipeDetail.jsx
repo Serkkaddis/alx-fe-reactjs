@@ -17,6 +17,7 @@ const RecipeDetail = () => {
 
   return (
     <div className="p-6 max-w-4xl mx-auto">
+  <div className="bg-white rounded-lg shadow-lg p-6">
   <h1 className="text-3xl font-bold mb-4">{recipe.title}</h1>
   <img
     src={recipe.image}
@@ -36,7 +37,7 @@ const RecipeDetail = () => {
     ))}
   </ol>
 </div>
-
+</div>
   );
 };
 
