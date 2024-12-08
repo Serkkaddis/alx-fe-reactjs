@@ -14,6 +14,7 @@ const AddRecipeForm = () => {
   });
 
   const handleChange = (e) => {
+    console.log("Input Change Triggered", e.target.name, e.target.value);
     const { name, value } = e.target;
     setFormData({
       ...formData,
