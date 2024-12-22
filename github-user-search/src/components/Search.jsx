@@ -1,25 +1,22 @@
 import React, { useState } from 'react';
-import { fetchUserData } from '../services/githubService'; 
+import { fetchUserData } from '../services/githubService';
 import axios from "axios";
 
 const Search = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [userData, setUserData] = useState(null);
+  const [username, setUsername] = useState('');
+  const [location, setLocation] = useState('');
+  const [minRepos, setMinRepos] = useState('');
+  const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
 
-  // Handle input change
-  const handleChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
-
-  // Fetch user data from GitHub API
-  const fetchUserData = async (username) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setLoading(true);
-    setError(null);
+    setError('');
     try {
-      const response = await axios.get(`https://api.github.com/users/${username}`);
-      setUserData(response.data);
+        const userResults = await fetchUserData(username, location, minRepos); 
+      setResults(userResults);
     } catch (err) {
       setError("Looks like we cant find the user");
     } finally {
@@ -27,39 +24,48 @@ const Search = () => {
     }
   };
 
-  // Handle form submission
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (searchTerm) {
-      fetchUserData(searchTerm);
-    }
-  };
-
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="p-4 max-w-3xl mx-auto">
+      <h1 className="text-2xl font-bold text-center mb-4">GitHub User Search</h1>
+      <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
         <input
           type="text"
-          placeholder="Search for GitHub user"
-          value={searchTerm}
-          onChange={handleChange}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Enter GitHub Username"
+          className="border p-2 rounded"
         />
-        <button type="submit">Search</button>
+        <input
+          type="text"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          placeholder="Location (Optional)"
+          className="border p-2 rounded"
+        />
+        <input
+          type="number"
+          value={minRepos}
+          onChange={(e) => setMinRepos(e.target.value)}
+          placeholder="Min Repos (Optional)"
+          className="border p-2 rounded"
+        />
+        <button type="submit" className="bg-blue-500 text-white py-2 rounded">Search</button>
       </form>
 
-      {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
+      {loading && <p className="text-center mt-4">Loading...</p>}
+      {error && <p className="text-center mt-4 text-red-500">{error}</p>}
 
-      {userData && (
-        <div>
-          <h2>{userData.login}</h2> {/* Displaying GitHub username */}
-          <img src={userData.avatar_url} alt={userData.login} />
-          <p>{userData.bio}</p>
-          <a href={userData.html_url} target="_blank" rel="noopener noreferrer">
-            View Profile
-          </a>
-        </div>
-      )}
+      <div className="mt-6">
+        {results.length > 0 && results.map((user) => (
+          <div key={user.id} className="border p-4 mb-4 rounded">
+            <a href={user.html_url} className="font-bold text-blue-500">
+              {user.login}
+            </a>
+            <p>Location: {user.location || 'N/A'}</p>
+            <p>Repositories: {user.public_repos}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
