@@ -3,18 +3,14 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import React from 'react';
+import Search from './components/Search';
 
 const App = () => {
   return (
-    <div>
-      <header>
-        <h1>GitHub User Search</h1>
-      </header>
-      <main>
-        <p>Start your search!</p>
-      </main>
+    <div className="App">
+      <h1>GitHub User Search</h1>
+      <Search />
     </div>
   );
 };
-
 export default App
